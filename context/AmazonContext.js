@@ -14,7 +14,7 @@ export const AmazonProvider = ({ children }) => {
         Moralis,
         user,
         isWeb3Enabled,
-    } = useMoralis
+    } = useMoralis()
 
     useEffect(() => {  
         ; (async () => {

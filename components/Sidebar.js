@@ -15,18 +15,6 @@ import { AiOutlineHistory } from 'react-icons/ai'
 // images
 import logo from '../assets/amazon_logo.png';
 import logoFull from '../assets/amazon_logo_full.png';
-
-const isAuthenticated = true
-const nickname = ''
-const username = ''
-
-const {
-        isAuthenticated,
-        nickname,
-        setNickname,
-        username,
-        handleSetUsername
-} = useContext(AmazonContext)
     
 const Sidebar = () => {
 
@@ -45,6 +33,14 @@ const Sidebar = () => {
         menuItem: `flex items-center text-lg font-bold cursor-pointer gap-2`,
         companyName: `text-lg font-bold flex flex-1 pl-10 items-center mt-[20px]`,
     }
+
+    const {
+        isAuthenticated,
+        nickname,
+        setNickname,
+        username,
+        handleSetUsername
+    } = useContext(AmazonContext)
 
     return (
         <div className={styles.container}>
@@ -68,13 +64,13 @@ const Sidebar = () => {
                                             type="text"
                                             placeholder="Username..."
                                             className={styles.usernameInput}
-                                            // value = {nickname}
-                                            // onChange={e => setNickname(e.target.value)}
+                                            value = {nickname}
+                                            onChange={e => setNickname(e.target.value)}
                                         />    
                                     </div>    
                                     <button
                                         className={styles.setNickname}
-                                        // onClick={handleSetUsername}}
+                                        onClick={handleSetUsername}
                                     >
                                         Set Nickname!
                                     </button>
@@ -95,7 +91,7 @@ const Sidebar = () => {
                     <div className={styles.menuItem}>
                         <Image alt='img' src={logo} height={30} width={30} className={styles.amazonLogo} />
                         My amazon
-                        <br /> board
+                        <br /> Board
                     </div>
                 </Link>
                     <div className={styles.menuItem}>
