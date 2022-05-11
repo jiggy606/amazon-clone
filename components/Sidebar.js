@@ -1,6 +1,10 @@
 // important imports
 import React from 'react';
-import { ConnectButton } from 'web3uikit'; 
+import { createContext, useState, useEffect } from "react";
+import { useContext } from 'react';
+import { useMoralis, useMoralisQuery } from 'react-moralis';
+import { ConnectButton } from 'web3uikit';
+import { AmazonContext } from '../context/AmazonContext'; 
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaBox } from 'react-icons/fa';
@@ -13,7 +17,16 @@ import logo from '../assets/amazon_logo.png';
 import logoFull from '../assets/amazon_logo_full.png';
 
 const isAuthenticated = true
-const username = 'Daniel'
+const nickname = ''
+const username = ''
+
+const {
+        isAuthenticated,
+        nickname,
+        setNickname,
+        username,
+        handleSetUsername
+} = useContext(AmazonContext)
     
 const Sidebar = () => {
 
@@ -26,6 +39,11 @@ const Sidebar = () => {
         usernameInput: `bg-transparent border-white border-2 rounded-lg w-[80%] py-2 px-4 text-lg mt-[20px] placeholder:text-white focus:outline-none flex justify-center items-center text-white`,
         username: `flex items-center w-full justify-center`,
         setNickname: `text-lg font-bold flex flex-1 items-center mt-[20px] mb-[20px] text-white`,
+        menuItem: `flex items-center text-lg font-bold cursor-pointer gap-2`,
+        amazonLogo: `mr-4 flex object-cover`,
+        menu: `flex flex-col w-full h-full px-10 gap-10`,
+        menuItem: `flex items-center text-lg font-bold cursor-pointer gap-2`,
+        companyName: `text-lg font-bold flex flex-1 pl-10 items-center mt-[20px]`,
     }
 
     return (
@@ -98,6 +116,9 @@ const Sidebar = () => {
                         Transaction History
                     </div>
                 </Link>
+            </div>
+            <div className={styles.companyName}>
+                <Image alt='amazon' src={logoFull} height={100} width={100} />
             </div>
         </div>
     )
