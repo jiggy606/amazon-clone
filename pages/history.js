@@ -3,6 +3,7 @@ import { useContext, useEffect } from 'react'
 import Sidebar from '../components/Sidebar'
 import Header from '../components/Header'
 import { AmazonContext } from '../context/AmazonContext'
+import Transactions from '../components/Transactions'
 
 const History = () => {
 
@@ -29,8 +30,8 @@ const History = () => {
                         <div className={styles.pageTitle}>No Purchase History</div>
                     )}
                     <div className={styles.transactions}>
-                        {ownedItems.map((item, index) => {
-                            {/* return <Transaction key={index} item={item} index={index} /> */}
+                        {ownedItems && ownedItems.map((item, index) => {
+                            return <Transactions key={index} item={item} index={index} />
                         })}
                     </div>
                 </div>

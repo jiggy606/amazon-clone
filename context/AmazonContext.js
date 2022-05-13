@@ -154,8 +154,8 @@ export const AmazonProvider = ({ children }) => {
     useEffect(() => {
         ; (async () => {
             if (isWeb3Enabled) {
-                await getOwnedAssets()
                 await getAssets()
+                await getOwnedAssets()
             }
         })()
     }, [isWeb3Enabled, assetsData, assetsDataisLoading])
@@ -176,7 +176,7 @@ export const AmazonProvider = ({ children }) => {
 
     const getOwnedAssets = async () => {
         try {
-            if (userData[0]) {
+            if (userData[0].attributes.getOwnedAssets) {
                 setOwnedItems(prevItems => [
                     ...prevItems, userData[0].attributes.ownedAsset,
                 ])
