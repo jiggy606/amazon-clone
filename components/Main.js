@@ -4,6 +4,7 @@ import { Card } from 'web3uikit';
 import { AmazonContext } from '../context/AmazonContext';
 import Cards from './Cards';
 import Header from './Header';
+import Featured from './Featured';
 
 const styles = {
     container: `h-full w-full flex flex-col mt-[50px] pr-[50px] overflow-hidden`,
@@ -16,7 +17,7 @@ const Main = () => {
     return (
         <div className={styles.container}>
             <Header />
-            {/* <Featured /> */}
+            <Featured />
             <Cards />
         </div>
     );
