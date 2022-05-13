@@ -15,6 +15,7 @@ export const AmazonProvider = ({ children }) => {
     const [etherscanLink, setEtherscanLink] = useState('')
     const [isLoading, setIsLoading] = useState(false)
     const [balance, setBalance] = useState('')
+    const [recentTransactions, setRecentTransactions] = useState([])
 
     const {
         authenticate,
@@ -44,6 +45,16 @@ export const AmazonProvider = ({ children }) => {
         } catch (error) {
             console.log(error)
         }
+    }
+
+    const listenToUpdates = async () => {
+        let query = new Moralis.Query('EthTransactions')
+        let subscription = await query.subscribe()
+        subscription.on('update', async object => {
+        console.log('New Transactions')
+        console.log(object)
+        setRecentTransactions([object])
+        })
     }
 
     const getBalance = async () => {
@@ -179,7 +190,8 @@ export const AmazonProvider = ({ children }) => {
                 setEtherscanLink,
                 currentAccount,
                 buyTokens,
-                buyAsset
+                buyAsset,
+                recentTransactions
             }}
         >
             {children}
