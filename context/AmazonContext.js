@@ -16,6 +16,7 @@ export const AmazonProvider = ({ children }) => {
     const [isLoading, setIsLoading] = useState(false)
     const [balance, setBalance] = useState('')
     const [recentTransactions, setRecentTransactions] = useState([])
+    const [ownedItems, setOwnedItems] = useState([])
 
     const {
         authenticate,
@@ -141,17 +142,19 @@ export const AmazonProvider = ({ children }) => {
         ; (async () => {
             if (isAuthenticated) {
                 await getBalance()
+                await listenToUpdates()
                 const currentUsername = await user?.get('nickname')
                 setUsername(currentUsername) 
                 const account = await user?.get('ethAddress')
                 setCurrentAccount(account)
             }
         })()
-    }, [isAuthenticated, user, username, currentAccount, getBalance])
+    }, [isAuthenticated, user, username, currentAccount, getBalance, listenToUpdates])
 
     useEffect(() => {
         ; (async () => {
             if (isWeb3Enabled) {
+                await getOwnedAssets()
                 await getAssets()
             }
         })()
@@ -168,6 +171,18 @@ export const AmazonProvider = ({ children }) => {
             }
         } else {
             console.log('There is no user')
+        }
+    }
+
+    const getOwnedAssets = async () => {
+        try {
+            if (userData[0]) {
+                setOwnedItems(prevItems => [
+                    ...prevItems, userData[0].attributes.ownedAsset,
+                ])
+            }
+        } catch (error) {
+            console.log(error)
         }
     }
 
@@ -191,7 +206,9 @@ export const AmazonProvider = ({ children }) => {
                 currentAccount,
                 buyTokens,
                 buyAsset,
-                recentTransactions
+                recentTransactions,
+                listenToUpdates,
+                ownedItems,
             }}
         >
             {children}
