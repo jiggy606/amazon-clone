@@ -98,7 +98,7 @@ export const AmazonProvider = ({ children }) => {
                 setCurrentAccount(account)
             }
         })()
-    }, [isAuthenticated, user, username, currentAccount])
+    }, [isAuthenticated, user, username, currentAccount, getBalance])
 
     useEffect(() => {
         ; (async () => {
@@ -139,7 +139,8 @@ export const AmazonProvider = ({ children }) => {
                 setIsLoading,
                 etherscanLink,
                 setEtherscanLink,
-                currentAccount
+                currentAccount,
+                buyTokens,
             }}
         >
             {children}
